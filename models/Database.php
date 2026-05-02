@@ -31,9 +31,15 @@ class Database
 
     public function getProducts()
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM products");
+        $stmt = $this->pdo->prepare("SELECT * FROM products ORDER BY popularityFactor DESC LIMIT 10");
         $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
 
-        return $stmt->fetchAll(PDO::FETCH_CLASS, "Product");
+    public function getProductById($id)
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM products WHERE id = :id");
+        $stmt->execute(['id' => $id]);
+        return $stmt->fetch(PDO::FETCH_OBJ);
     }
 }

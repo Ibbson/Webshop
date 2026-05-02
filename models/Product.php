@@ -9,3 +9,4 @@ class Product
     public $popularityFactor;
     public $category_id;
 }
+
