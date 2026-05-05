@@ -24,11 +24,6 @@ class Database
         }
     }
 
-    public function getConnection()
-    {
-        return $this->pdo;
-    }
-
     public function getProducts()
     {
         $stmt = $this->pdo->prepare("SELECT * FROM products ORDER BY popularityFactor DESC LIMIT 10");
@@ -39,7 +34,28 @@ class Database
     public function getProductById($id)
     {
         $stmt = $this->pdo->prepare("SELECT * FROM products WHERE id = :id");
-        $stmt->execute(['id' => $id]);
+        $stmt->execute(['id' => (int)$id]);
         return $stmt->fetch(PDO::FETCH_OBJ);
+    }
+
+    public function getCategory($id)
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM category WHERE id = :id");
+        $stmt->execute(['id' => (int)$id]);
+        return $stmt->fetchObject("Category");
+    }
+
+    public function getAllCategories()
+    {
+        $stmt = $this->pdo->query("SELECT * FROM category");
+        return $stmt->fetchAll(PDO::FETCH_CLASS, "Category");
+    }
+
+    public function getProductsForCategory($categoryId)
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM products WHERE category_id = :categoryId");
+        $stmt->execute(['categoryId' => (int)$categoryId]);
+
+        return $stmt->fetchAll(PDO::FETCH_CLASS, "Product");
     }
 }
