@@ -43,7 +43,9 @@ class Database
         $stmt = $this->pdo->prepare("SELECT * FROM category WHERE id = :id");
         $stmt->execute(['id' => (int)$id]);
         return $stmt->fetchObject("Category");
+        
     }
+    
 
     public function getAllCategories()
     {
