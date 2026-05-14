@@ -15,66 +15,71 @@ $categories = $db->getAllCategories();
     <meta charset="UTF-8">
     <title>Tech It Easy</title>
 
-    
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-   
+
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-    <div class="container-fluid">
+        <div class="container-fluid">
 
-        
-        <a class="navbar-brand" href="index.php">
-            Tech It Easy
-        </a>
 
-        
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+            <a class="navbar-brand" href="index.php">
+                Tech It Easy
+            </a>
 
-     
-        <div class="collapse navbar-collapse" id="navbarNav">
 
-            <ul class="navbar-nav ms-auto">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-               
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php">Home</a>
-                </li>
 
-               
-                <li class="nav-item dropdown">
+            <div class="collapse navbar-collapse" id="navbarNav">
 
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                        Categories
-                    </a>
+                <ul class="navbar-nav ms-auto">
 
-                    <ul class="dropdown-menu dropdown-menu-end">
 
-                        <?php foreach ($categories as $category) { ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php">Home</a>
+                    </li>
 
-                            <li>
-                                <a class="dropdown-item" href="category.php?id=<?php echo $category->id; ?>">
-                                    <?php echo $category->name; ?>
-                                </a>
-                            </li>
 
-                        <?php } ?>
+                    <li class="nav-item dropdown">
 
-                    </ul>
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Categories
+                        </a>
 
-                </li>
+                        <ul class="dropdown-menu dropdown-menu-end">
 
-            </ul>
+                            <?php foreach ($categories as $category) { ?>
+
+                                <li>
+                                    <a class="dropdown-item" href="category.php?id=<?php echo $category->id; ?>">
+                                        <?php echo $category->name; ?>
+                                    </a>
+                                </li>
+
+                            <?php } ?>
+
+                        </ul>
+
+                    </li>
+
+                </ul>
+                <form class="d-flex ms-3" method="get" action="search.php">
+                    <div class="input-group">
+                        <input name="q" class="form-control" type="search" placeholder="Search products..." />
+                        <button type="submit" class="btn btn-outline-light">Search</button>
+                    </div>
+                </form>
+            </div>
 
         </div>
 
-    </div>
-
-</nav>
+    </nav>

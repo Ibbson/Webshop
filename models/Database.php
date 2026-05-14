@@ -60,4 +60,11 @@ class Database
 
         return $stmt->fetchAll(PDO::FETCH_CLASS, "Product");
     }
+    public function searchProducts($q)
+{
+    $stmt = $this->pdo->prepare("SELECT * FROM products WHERE name LIKE :q OR description LIKE :q");
+    $stmt->execute(['q' => '%' . $q . '%']);
+    return $stmt->fetchAll(PDO::FETCH_CLASS, "Product");
 }
+}
+
