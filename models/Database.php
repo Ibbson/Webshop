@@ -52,14 +52,19 @@ class Database
         $stmt = $this->pdo->query("SELECT * FROM category");
         return $stmt->fetchAll(PDO::FETCH_CLASS, "Category");
     }
-
-    public function getProductsForCategory($categoryId)
-    {
-        $stmt = $this->pdo->prepare("SELECT * FROM products WHERE category_id = :categoryId");
-        $stmt->execute(['categoryId' => (int)$categoryId]);
-
-        return $stmt->fetchAll(PDO::FETCH_CLASS, "Product");
+public function getProductsForCategory($categoryId, $sort = 'name', $order = 'asc')
+{
+    if (!in_array($sort, ['name', 'price'])) {
+        $sort = 'name';
     }
+    if (!in_array($order, ['asc', 'desc'])) {
+        $order = 'asc';
+    }
+
+    $stmt = $this->pdo->prepare("SELECT * FROM products WHERE category_id = :categoryId ORDER BY $sort $order");
+    $stmt->execute(['categoryId' => (int)$categoryId]);
+    return $stmt->fetchAll(PDO::FETCH_CLASS, "Product");
+}
     public function searchProducts($q)
 {
     $stmt = $this->pdo->prepare("SELECT * FROM products WHERE name LIKE :q OR description LIKE :q");
