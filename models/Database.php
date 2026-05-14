@@ -65,9 +65,16 @@ public function getProductsForCategory($categoryId, $sort = 'name', $order = 'as
     $stmt->execute(['categoryId' => (int)$categoryId]);
     return $stmt->fetchAll(PDO::FETCH_CLASS, "Product");
 }
-    public function searchProducts($q)
+ public function searchProducts($q, $sort = 'name', $order = 'asc')
 {
-    $stmt = $this->pdo->prepare("SELECT * FROM products WHERE name LIKE :q OR description LIKE :q");
+    if (!in_array($sort, ['name', 'price'])) {
+        $sort = 'name';
+    }
+    if (!in_array($order, ['asc', 'desc'])) {
+        $order = 'asc';
+    }
+
+    $stmt = $this->pdo->prepare("SELECT * FROM products WHERE name LIKE :q OR description LIKE :q ORDER BY $sort $order");
     $stmt->execute(['q' => '%' . $q . '%']);
     return $stmt->fetchAll(PDO::FETCH_CLASS, "Product");
 }
