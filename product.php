@@ -1,8 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-
-
 require_once "models/Database.php";
 require_once "models/Product.php";
 
@@ -20,6 +16,19 @@ if (!$product) {
     die("Product not found");
 }
 
-echo "<h1>" . $product->name . "</h1>";
-echo "<p>" . $product->description . "</p>";
-echo "<strong>" . $product->price . " kr</strong>";
+require "components/header.php";
+?>
+
+<div class="container mt-4">
+    <a href="index.php" class="btn btn-outline-dark mb-4">← Back to shop</a>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h1 class="card-title"><?= $product->name ?></h1>
+            <p class="card-text text-muted"><?= $product->description ?></p>
+            <h3 class="mt-3"><?= $product->price ?> kr</h3>
+        </div>
+    </div>
+</div>
+
+<?php require "components/footer.php"; ?>
