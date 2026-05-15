@@ -23,6 +23,9 @@ require "components/header.php";
     <a href="index.php" class="btn btn-outline-dark mb-4">← Back to shop</a>
 
     <div class="card shadow-sm">
+        <?php if (!empty($product->image)): ?>
+            <img src="<?= $product->image ?>" class="card-img-top" alt="<?= $product->name ?>" style="max-height: 400px; object-fit: contain;">
+        <?php endif; ?>
         <div class="card-body">
             <h1 class="card-title"><?= $product->name ?></h1>
             <p class="card-text text-muted"><?= $product->description ?></p>
