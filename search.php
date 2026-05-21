@@ -15,8 +15,7 @@ require "components/header.php";
 ?>
 
 <div class="container mt-4">
-    <h2 class="mb-4">Sökresultat för: "<?= htmlspecialchars($q) ?>"</h2>
-
+<h2 class="mb-4">Search results for: "<?= htmlspecialchars($q) ?>"</h2>
     <select id="sortselect" class="form-select w-auto mb-4">
         <option value="name-asc" <?= $selectedOption === 'name-asc' ? 'selected' : '' ?>>Namn A-Ö</option>
         <option value="name-desc" <?= $selectedOption === 'name-desc' ? 'selected' : '' ?>>Namn Ö-A</option>

@@ -8,15 +8,24 @@ $db = new Database();
 $products = $db->getProducts();
 
 require "components/header.php";
+?>
 
-echo '<div class="container mt-4">';
-echo '<h2 class="mb-4">Popular Products</h2>';
-echo '<div class="row">';
+<div class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1>Retro End</h1>
+        <p class="hero-subtitle">Authentic Retro Football Gear</p>
+        <a href="#products" class="btn-gold">Shop Now</a>
+    </div>
+</div>
 
-foreach ($products as $product) {
-    include "components/productcard.php";
-}
+<div class="container mt-5" id="products">
+    <h2 class="mb-4 text-center" style="color: #6B4F10; letter-spacing: 3px; text-transform: uppercase;">Popular Products</h2>
+    <div class="row">
+        <?php foreach ($products as $product) {
+            include "components/productcard.php";
+        } ?>
+    </div>
+</div>
 
-echo '</div></div>';
-
-require "components/footer.php";
+<?php require "components/footer.php"; ?>

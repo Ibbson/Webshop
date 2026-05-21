@@ -8,5 +8,6 @@ class Product
     public $price;
     public $popularityFactor;
     public $category_id;
+     public $image;
 }
 

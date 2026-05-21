@@ -35,7 +35,7 @@ class Database
 
     public function getProducts()
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM products ORDER BY popularityFactor DESC LIMIT 10");
+        $stmt = $this->pdo->prepare("SELECT * FROM products WHERE popularityFactor > 75 ORDER BY popularityFactor DESC");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
