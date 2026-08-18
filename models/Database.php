@@ -87,4 +87,11 @@ class Database
         $stmt->execute(['q' => '%' . $q . '%']);
         return $stmt->fetchAll(PDO::FETCH_CLASS, "Product");
     }
+    public function getAllProducts()
+{
+    $stmt = $this->pdo->prepare("SELECT * FROM products");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ);
 }
+}
+
