@@ -2,6 +2,21 @@
 
 require_once __DIR__ . "/../models/Database.php";
 require_once __DIR__ . "/../models/Category.php";
+require_once __DIR__ . "/../vendor/autoload.php";
+
+$lines = file(__DIR__ . '/../.env', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+foreach ($lines as $line) {
+    [$key, $value] = explode('=', $line, 2);
+    $_ENV[trim($key)] = trim($value);
+}
+
+$pdo = new PDO(
+    "mysql:host={$_ENV['DB_HOST']};dbname={$_ENV['DB_NAME']};charset=utf8",
+    $_ENV['DB_USER'],
+    $_ENV['DB_PASS']
+);
+
+$auth = new \Delight\Auth\Auth($pdo);
 
 $db = new Database();
 $categories = $db->getAllCategories();
@@ -63,6 +78,24 @@ $categories = $db->getAllCategories();
                         </ul>
 
                     </li>
+
+                    <?php if ($auth->isLoggedIn()): ?>
+                        <li class="nav-item">
+                            <span class="nav-link" style="color: var(--gold);">
+                                <?= $auth->getUsername() ?>
+                            </span>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="logout.php">Logout</a>
+                        </li>
+                    <?php else: ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="login.php">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="register.php">Register</a>
+                        </li>
+                    <?php endif; ?>
 
                 </ul>
                 <form class="d-flex ms-3" method="get" action="search.php">
