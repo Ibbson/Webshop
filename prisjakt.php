@@ -1,9 +1,18 @@
 <?php
 require_once "models/Database.php";
 require_once "models/Product.php";
+require_once "Logger.php";
 
+$logger = new Logger('info.log', 'error.log');
 $db = new Database();
-$products = $db->getAllProducts();
+
+try {
+    $products = $db->getAllProducts();
+    $logger->info("Prisjakt XML feed generated with " . count($products) . " products");
+} catch (Exception $e) {
+    $logger->error("Failed to generate Prisjakt XML feed: " . $e->getMessage());
+    die("Error generating feed");
+}
 
 header('Content-Type: application/xml; charset=utf-8');
 
