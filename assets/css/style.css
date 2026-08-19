@@ -211,4 +211,12 @@ footer {
     .navbar-toggler {
         display: none !important;
     }
+.alert-success {
+    background-color: var(--cream) !important;
+    border-color: var(--gold) !important;
+    color: var(--dark) !important;
+    padding: 8px 16px !important;
+    font-size: 14px !important;
+}
+}
 }

@@ -81,6 +81,9 @@ $categories = $db->getAllCategories();
 
                     <?php if ($auth->isLoggedIn()): ?>
                         <li class="nav-item">
+                            <a class="nav-link" href="cart.php">🛒 Cart</a>
+                        </li>
+                        <li class="nav-item">
                             <span class="nav-link" style="color: var(--gold);">
                                 <?= $auth->getUsername() ?>
                             </span>
