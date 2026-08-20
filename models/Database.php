@@ -122,4 +122,9 @@ class Database
         $stmt = $this->pdo->prepare("DELETE FROM cart WHERE id = :cartId AND user_id = :userId");
         $stmt->execute(['cartId' => $cartId, 'userId' => $userId]);
     }
+    public function clearCart($userId)
+{
+    $stmt = $this->pdo->prepare("DELETE FROM cart WHERE user_id = :userId");
+    $stmt->execute(['userId' => $userId]);
+}
 }
